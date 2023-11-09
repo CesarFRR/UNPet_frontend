@@ -7,7 +7,7 @@ export const UserContext = createContext();
 
 export const UserContextProvider = ({ children }) => {
     const UserAxios = new UNPetAxios('/accounts');
-    const UserAxios = new UNPetAxios('/accounts');
+   
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [username, setUsername] = useState("Anonymous");
     const [urlfoto, setUrlfoto] = useState("/user-img-default.png");
