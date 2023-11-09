@@ -6,7 +6,7 @@ import { useMediaQuery } from 'react-responsive';
 export const UserContext = createContext();
 
 export const UserContextProvider = ({ children }) => {
-    const UserAxios = new UNPetAxios();
+    const UserAxios = new UNPetAxios('/accounts');
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [username, setUsername] = useState("Anonymous");
     const [urlfoto, setUrlfoto] = useState("/user-img-default.png");
@@ -41,7 +41,7 @@ export const UserContextProvider = ({ children }) => {
     useEffect(() => {
         const checkAuth = async () => {
             try {
-                const response = await UserAxios.get("/accounts/api/session/");
+                const response = await UserAxios.get("/api/session/");
                 console.log('tengo session?:-->', response, response.data);
                 setIsAuthenticated(response.data.is_authenticated);
 
