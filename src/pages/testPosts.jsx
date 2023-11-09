@@ -12,6 +12,13 @@ const ScrollList = () => {
 
     }, []);
 
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+    }
+
+    const imagenes = ["https://i.imgur.com/2CoV1nA.jpg", "https://i.imgur.com/8mtgT8C.png", "https://i.imgur.com/6TeLmcc.png"
+    ]
+
     const fetchItems = async () => {
         if (nextPageUrl === null) {
             setHasMore(false);
@@ -56,12 +63,12 @@ const ScrollList = () => {
                                 </div>
                                 <h3 className="text-lg font-medium mb-2">{item.titulo}</h3>
                                 <p className="text-gray-500 text-sm mb-4">{item.descripcion}</p>
-                                <img className="w-full" src={"https://i.imgur.com/2CoV1nA.jpg"} alt={item.titulo} />
+                                <img className="w-full" src={imagenes[(index % 3)]} alt={item.titulo} />
                                 <div className="flex items-center justify-between m-3">
                                     <div className="flex items-center justify-between w-full mt-3">
                                         <a href="#" className="flex items-center ml-4">
                                             <FaHeart className="w-5 h-5 text-gray-500 mr-1" />
-                                            <p className="text-gray-500 text-sm">{item.likes}</p>
+                                            <p className="text-gray-500 text-sm">{getRandomInt(10)}</p>
                                         </a >
                                         <a href="/login" className="flex items-center">
                                             <FaComment className="w-5 h-5 text-gray-500 mr-1" />

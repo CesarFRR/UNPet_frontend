@@ -28,38 +28,22 @@ export function Register() {
   const [errorEmail, setErrorEmail] = useState('');
   const [errorPassword, setErrorPassword] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const usernameRegex = /^[a-zA-Z0-9_]+$/;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
 
-    if (!usernameRegex.test(data.username)) {
-      setErrorUsername({message:'El nombre de usuario solo puede contener letras, números y guiones bajos.'});
-    } else {
-      setErrorUsername('');
+    try {
+      const resp = await register(data);
+      navigate('/home');
+
+    } catch (error) {
+      setError(true);
+      console.log('Login failed: ', error);
     }
 
-    if (!emailRegex.test(data.get('email'))) {
-      setErrorEmail({message:'Ingrese una dirección de correo electrónico válida.'});
-    } else {
-      setErrorEmail('');
-    }
-
-    if (!passwordRegex.test(data.get('password'))) {
-      setErrorPassword({message:'La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número.'});
-    } else {
-      setErrorPassword('');
-    }
-
-    if (usernameRegex.test(data.username) && emailRegex.test(data.get('email')) && passwordRegex.test(data.get('password'))) {
-      console.log({
-        email: data.get('email'),
-        password: data.get('password'),
-      });
-      console.log(register(data));
-    }
   };
 
     return (

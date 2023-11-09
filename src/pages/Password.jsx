@@ -17,7 +17,7 @@ export function Password() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="max-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           Recuperar contraseña
@@ -33,7 +33,7 @@ export function Password() {
               </label>
               <div className="relative rounded-md shadow-sm">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <FaEnvelope className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                  <FaEnvelope className="h-5 w-5 text-gray-400" aria-hidden="true" />
                 </div>
                 <input
                   id="email"
@@ -55,7 +55,7 @@ export function Password() {
               </label>
               <div className="relative rounded-md shadow-sm">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <FaLock className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                  <FaLock className="h-5 w-5 text-gray-400" aria-hidden="true" />
                 </div>
                 <input
                   id="password"

@@ -9,26 +9,25 @@ export function Login() {
   const navigate = useNavigate();
   const [error, setError] = useState(false);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      userID: data.get('userID'),
-      password: data.get('password'),
-    });
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
+      console.log({
+        userID: data.get('userID'),
+        password: data.get('password'),
+      });
+      try {
+        const resp = await login(data);
+        navigate('/home');
 
-    const resp = await login(data);
-    //console.log(resp.data, resp);
-    if (resp.isAuthenticated) {
-      navigate('/home');
-    } else {
-      setError(true);
-      console.log('Login failed: ', resp);
-    }
-  };
+      } catch (error) {
+        setError(true);
+        console.log('Login failed: ', error);
+      }
+    };
 
   return (
-    <div className="bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="max-h-screen bg-gray-50 flex flex-col justify-center py-36 sm:px-6 lg:px-8 h-full">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <img
           className="mx-auto h-12 w-auto"

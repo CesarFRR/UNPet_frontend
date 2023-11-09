@@ -20,7 +20,7 @@ if (DEBUG) {
 } else {
     // Test each URL with a simple GET request to "accounts/api/test/"
     const urls = [
-        "http://127.0.0.1:8000",
+        "http://127.0.0.1:8000/api",
         "",
         "https://unpet-api-rest.onrender.com/api"
     ];

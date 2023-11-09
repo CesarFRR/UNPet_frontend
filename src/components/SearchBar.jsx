@@ -58,19 +58,19 @@ function SearchBar({ onSearch }) {
     // Combina las palabras que comienzan con '@' y las que no
     const searchTextFormated = [...atWords, ...otherWords].join(' ');
 
-        onSearch(searchTextFormated);
-      };
-      // const highlightTags = (text) => {
-      //   const regex = /@(\w+)(?!\S)/g;
-      //   return text.replace(regex, '<span class="tag">@$1</span>');
-      // };
+    onSearch(searchTextFormated);
+  };
+  // const highlightTags = (text) => {
+  //   const regex = /@(\w+)(?!\S)/g;
+  //   return text.replace(regex, '<span class="tag">@$1</span>');
+  // };
   return (
     <div className="w-full mx-auto flex justify-center">
       <div className="relative w-2/3">
         <input
           className="w-full border border-gray-300 bg-white h-10 px-5 pr-10 rounded-lg text-sm focus:outline-none"
           type="text"
-          placeholder="Buscar.."
+          placeholder="Buscar..."
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
           onKeyDown={(e) => {

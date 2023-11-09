@@ -1,13 +1,17 @@
-# Stage 1 - the build process
-FROM node:14 as build-deps
-WORKDIR /usr/src/app
-COPY package*.json ./
-RUN npm install
-COPY . ./
-RUN npm run build
+# pull official base image
+FROM node:18.16.1-slim
 
-# Stage 2 - the production environment
-FROM nginx:1.17.8-alpine
-COPY --from=build-deps /usr/src/app/dist /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# set working directory
+WORKDIR /usr/src/app
+
+# add `/usr/src/app/node_modules/.bin` to $PATH
+ENV PATH /usr/src/app/node_modules/.bin:$PATH
+
+# install and cache app dependencies
+COPY package.json yarn.lock ./ 
+#COPY package-lock.json .
+RUN npm install -g yarn --force
+RUN yarn install --frozen-lockfile   
+
+# start app
+CMD ["yarn", "vite", "--host"]  

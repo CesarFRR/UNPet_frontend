@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaCheckCircle, FaLock } from 'react-icons/fa';
+import {orgRegister} from '../api/accounts.api'
 
 export const localidades = [
   { id: '1', name: 'Usaquén' },
@@ -30,21 +31,23 @@ export function RegisterOrg() {
   const [localidad, setLocalidad] = useState('');
   const [errorNit, setErrorNit] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const nitRegex = /^\d{1,3}\.\d{3}\.\d{3}-\d{1}$/;
 
-    if (!nitRegex.test(data.nit)) {
-      setErrorNit({ message: 'El NIT no cumple con el formato válido.' });
-    } else {
-      setErrorNit('');
-    }
     console.log({
       email: data.get('email'),
       password: data.get('password'),
     });
+ try {
+      const resp = await orgRegister(data);
+      navigate('/home');
 
+    } catch (error) {
+      setError(true);
+      console.log('Login failed: ', error);
+    }
   };
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
